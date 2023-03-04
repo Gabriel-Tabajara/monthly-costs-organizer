@@ -5,7 +5,7 @@ Do an interface to organize my monthly costs
 ## Features
 
 ### 1 - Cost management
-- Add a cost (value and local)
+- Add a cost
 - Get all costs by month
 - Edit a cost
 - Delete a cost
@@ -33,9 +33,7 @@ Do an interface to organize my monthly costs
 - COST 
     - id (PK)
     - value
-    - day
-    - week (1st, 2nd, 3rd, 4th, 5th)
-    - Month (FK)
+    - date
     - local (FK)
     - category (FK)
 - CATEGORY 
@@ -45,5 +43,3 @@ Do an interface to organize my monthly costs
 - LOCAL 
     - id
     - name 
-- MONTH/YEAR 
-    - id (mm/yyyy)

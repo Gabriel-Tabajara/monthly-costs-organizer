@@ -18,7 +18,7 @@ public class CostRepository {
     public void postCost(Cost cost) {
         try {
             DatabaseReference costsRef = dbRef.child("costs");
-            costsRef.setValueAsync(cost);
+            costsRef.child(cost.getId()).setValueAsync(cost);
         } catch (Exception e) {
             System.out.println(e);
         }

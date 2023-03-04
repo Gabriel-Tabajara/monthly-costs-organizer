@@ -18,7 +18,8 @@ public class CostService {
         this.costRep = costRep;
     }
 
-    public void addCost(Cost cost) {
+    public Cost addCost(Cost cost) {
         this.costRep.postCost(cost);
+        return cost;
     }
 }
