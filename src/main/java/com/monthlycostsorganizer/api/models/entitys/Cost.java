@@ -1,7 +1,14 @@
 package com.monthlycostsorganizer.api.models.entitys;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "costs")
 public class Cost {
-    
+
+    @Id
     private String id;
 
     private double value;
