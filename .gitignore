@@ -34,3 +34,6 @@ build/
 
 ###Firebase account key###
 src/main/java/com/monthlycostsorganizer/api/firebase/serviceAccountKey.json
+
+## env file
+env.properties

@@ -1,6 +1,6 @@
 package com.monthlycostsorganizer.api.firebase;
 
-// import javax.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +18,12 @@ import java.io.FileInputStream;
 @Configuration
 public class FirebaseConfig {
 
+    @Value("${spring.database.url}")
+    private String databaseUrl;
+
     @PostConstruct
     public void initialize() {
+
 
         try {
 
@@ -27,7 +31,7 @@ public class FirebaseConfig {
 
             FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    .setDatabaseUrl("https://monthly-costs-organizer-95468-default-rtdb.firebaseio.com")
+                    .setDatabaseUrl(this.databaseUrl)
                     .build();
 
             FirebaseApp.initializeApp(options);
