@@ -11,22 +11,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.monthlycostsorganizer.api.models.entitys.Cost;
+
 @Repository
 public class CostRepository {
     private DatabaseReference dbRef;
 
     @Autowired
     public CostRepository(DatabaseReference databaseReference) {
-        this.dbRef = databaseReference;
+        this.dbRef = null;
     }
 
     public void postCostDB(Cost cost, String monthYear) {
-        try {
-            DatabaseReference costsRef = this.dbRef.child("month-year");
-            costsRef.child(monthYear).child(cost.getId()).setValueAsync(cost);
-        } catch (Exception e) {
-            throw new Error(e.toString());
-        }
+        DatabaseReference costsRef = this.dbRef.child("month-year");
+        costsRef.child(monthYear).child(cost.getId()).setValueAsync(cost);
     }
 
     public CompletableFuture<ArrayList<Cost>> getCostsByMonthDB(String mthYrId) {
@@ -37,7 +34,7 @@ public class CostRepository {
             costsRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    for(DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                         Cost cost = childSnapshot.getValue(Cost.class);
                         costs.add(cost);
                     }

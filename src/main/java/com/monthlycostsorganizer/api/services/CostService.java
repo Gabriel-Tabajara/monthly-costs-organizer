@@ -23,11 +23,9 @@ public class CostService {
         this.costRep = costRep;
     }
 
-    public Cost addCost(Cost cost, Date date) {
+    public void addCost(Cost cost, Date date) {
         String monthyear = MonthYear.dateToMonthYear(date);
         this.costRep.postCostDB(cost, monthyear);
-        
-        return cost;
     }
     
     public ArrayList<Cost> getCostsByMonth(String month, String year) {
