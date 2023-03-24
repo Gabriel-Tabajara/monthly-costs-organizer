@@ -5,7 +5,7 @@ Do an interface to organize my monthly costs
 ## Features
 
 ### 1 - Cost management
-- Add a cost
+- Add a cost ✅
 - Get all costs by month
 - Edit a cost
 - Delete a cost

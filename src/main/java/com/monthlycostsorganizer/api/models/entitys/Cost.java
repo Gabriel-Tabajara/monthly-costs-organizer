@@ -1,5 +1,6 @@
 package com.monthlycostsorganizer.api.models.entitys;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
@@ -8,7 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "costs")
+@Table(name = "cost")
 public class Cost {
 
     @Id
@@ -16,19 +17,27 @@ public class Cost {
 
     private double value;
 
-    private Date date;
+    private int day;
 
     private String local;
 
+    public Cost() {}
+
     public Cost(double value, Date date, String local) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
         this.id = UUID.randomUUID().toString();
         this.value = value;
-        this.date = date;
+        this.day = calendar.get(Calendar.DAY_OF_MONTH) + 1;
         this.local = local;
     }
 
     public String getId() {
         return this.id;
+    }
+    
+    public void setId(String id) {
+        this.id = id;
     }
 
     public double getValue() {
@@ -43,15 +52,16 @@ public class Cost {
         return this.local;
     }
     
+
+    public int getDay() {
+        return this.day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
     public void setLocal(String local) {
         this.local = local;
-    }
-
-    public Date getDate() {
-        return this.date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 }

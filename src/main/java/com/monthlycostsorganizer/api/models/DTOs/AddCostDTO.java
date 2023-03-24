@@ -1,8 +1,9 @@
 package com.monthlycostsorganizer.api.models.DTOs;
 
-import java.util.Date;
 
 import javax.validation.constraints.NotNull;
+
+import java.util.Date;
 
 public class AddCostDTO {
     @NotNull(message = "value cannot be empty")
