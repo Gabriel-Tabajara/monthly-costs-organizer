@@ -27,29 +27,25 @@ public class CostRepository {
     }
 
     public CompletableFuture<ArrayList<Cost>> getCostsByMonthDB(String mthYrId) {
-        try {
-            DatabaseReference costsRef = this.dbRef.child("month-year/" + mthYrId);
-            ArrayList<Cost> costs = new ArrayList<>();
-            CompletableFuture<ArrayList<Cost>> future = new CompletableFuture<>();
-            costsRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                        Cost cost = childSnapshot.getValue(Cost.class);
-                        costs.add(cost);
-                    }
-                    future.complete(costs);
+        DatabaseReference costsRef = this.dbRef.child("month-year/" + mthYrId);
+        ArrayList<Cost> costs = new ArrayList<>();
+        CompletableFuture<ArrayList<Cost>> future = new CompletableFuture<>();
+        costsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    Cost cost = childSnapshot.getValue(Cost.class);
+                    costs.add(cost);
                 }
+                future.complete(costs);
+            }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    System.out.println("The read failed: " + databaseError.getCode());
-                }
-            });
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
 
-            return future;
-        } catch (Exception e) {
-            throw new Error(e.toString());
-        }
+        return future;
     }
 }
