@@ -15,7 +15,6 @@ public class AddCostDTO {
     @NotNull(message = "local cannot be empty")
     private String local;
 
-
     public AddCostDTO(double value, Date date, String local) {
         this.value = value;
         this.date = date;

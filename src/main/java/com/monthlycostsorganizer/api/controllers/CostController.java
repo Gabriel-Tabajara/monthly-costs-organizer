@@ -28,23 +28,27 @@ public class CostController {
 
     private AddCostUC addCostUc;
     private GetMonthlyCostsUC getMonthlyCostsUC;
-
-    private ValidatorFactory validFactory = Validation.buildDefaultValidatorFactory();
-    private Validator validator = this.validFactory.getValidator();
-
+    
     @Autowired
     public CostController(AddCostUC addCostUc, GetMonthlyCostsUC getAllCostsByMonthUC) {
         this.addCostUc = addCostUc;
-        this.validFactory = Validation.buildDefaultValidatorFactory();
         this.getMonthlyCostsUC = getAllCostsByMonthUC;
     }
     
     @PostMapping("/add")
     @CrossOrigin(origins = "*")
     public String createCost(@RequestBody AddCostDTO newCost) {
+        ValidatorFactory validFactory = Validation.buildDefaultValidatorFactory();
+        Validator validator = validFactory.getValidator();
         Set<ConstraintViolation<AddCostDTO>> violations = validator.validate(newCost);
+
         if (violations.size() > 0) {
-            return "Deu erro";
+            StringBuilder errorMessage = new StringBuilder();
+            for (ConstraintViolation<AddCostDTO> violation : violations) {
+                errorMessage.append(String.format("Error: %s\n", violation.getMessage()));
+            }
+            
+            return errorMessage.toString();
         }
         Cost cost = this.addCostUc.execute(newCost.getValue(), newCost.getLocal(), newCost.getDate());
         return "Cost addded: " + cost;
