@@ -32,9 +32,6 @@ public class GetMonthlyCostsUC {
 
             ArrayList<Cost> costsFromMonth;
             costsFromMonth = this.costService.getCostsByMonth(month, year);
-
-            if (costsFromMonth == null) {
-            }
             
             return ResponseEntity.status(HttpStatus.OK).body(costsFromMonth);
         } catch (Exception e) {

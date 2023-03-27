@@ -6,7 +6,7 @@ Do an interface to organize my monthly costs
 
 ### 1 - Cost management
 - Add a cost ✅
-- Get all costs by month
+- Get all costs by month ✅
 - Edit a cost
 - Delete a cost
 - Filter by the more expensive to the least and vice versa

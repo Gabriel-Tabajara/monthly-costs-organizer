@@ -18,7 +18,7 @@ public class CostRepository {
 
     @Autowired
     public CostRepository(DatabaseReference databaseReference) {
-        this.dbRef = null;
+        this.dbRef = databaseReference;
     }
 
     public void postCostDB(Cost cost, String monthYear) {
