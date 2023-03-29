@@ -5,12 +5,12 @@ An API to organize my monthly costs
 ## Features
 
 ### 1 - Cost management
-- Add a cost ✅
-- Get all costs by month ✅
-- Delete a cost✅
-- Filter by the more expensive to the least and vice versa
-- Filter the costs by week in month
-- Put in order by day
+- Add a cost - Route✅ - Front-end
+- Get all costs by month - Route✅ - Front-end
+- Delete a cost - Route✅ - Front-end
+- Filter by the most expensive to the least and vice versa - Front-end
+- Filter the costs by week in month - Front-end
+- Put in order by day - Order Route✅
 ### 2 - Categories
 - Add a category (name, month and limit, no limit should be an option)
 - Add a cost into a category

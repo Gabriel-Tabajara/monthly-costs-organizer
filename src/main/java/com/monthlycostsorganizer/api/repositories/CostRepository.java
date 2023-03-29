@@ -47,7 +47,7 @@ public class CostRepository {
         DatabaseReference costsRef = this.dbRef.child("month-year/" + mthYrId);
         ArrayList<Cost> costs = new ArrayList<>();
         CompletableFuture<ArrayList<Cost>> future = new CompletableFuture<>();
-        costsRef.addValueEventListener(new ValueEventListener() {
+        costsRef.orderByChild("day").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {

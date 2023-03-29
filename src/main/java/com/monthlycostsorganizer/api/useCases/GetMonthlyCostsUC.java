@@ -30,9 +30,8 @@ public class GetMonthlyCostsUC {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: Negative years are not allowed!");
             }
 
-            ArrayList<Cost> costsFromMonth;
-            costsFromMonth = this.costService.getCostsByMonth(month, year);
-            
+            ArrayList<Cost> costsFromMonth = this.costService.getCostsByMonth(month, year);
+
             return ResponseEntity.status(HttpStatus.OK).body(costsFromMonth);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unexpected Error!");
