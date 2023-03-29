@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.monthlycostsorganizer.api.models.entitys.Cost;
+import com.monthlycostsorganizer.api.models.entitys.MonthYear;
 
 @Repository
 public class CostRepository {
@@ -21,9 +22,25 @@ public class CostRepository {
         this.dbRef = databaseReference;
     }
 
-    public void postCostDB(Cost cost, String monthYear) {
-        DatabaseReference costsRef = this.dbRef.child("month-year");
-        costsRef.child(monthYear).child(cost.getId()).setValueAsync(cost);
+    public CompletableFuture<Cost> getCostById(String id, String mthYrId) {
+        DatabaseReference costRef = this.dbRef.child("month-year/" + mthYrId + "/" + id);
+        CompletableFuture<Cost> future = new CompletableFuture<>();
+        costRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot != null) {
+                    Cost cost = dataSnapshot.getValue(Cost.class);
+                    future.complete(cost);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+        
+        return future;
     }
 
     public CompletableFuture<ArrayList<Cost>> getCostsByMonthDB(String mthYrId) {
@@ -45,7 +62,17 @@ public class CostRepository {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
-
+        
         return future;
+    }
+
+    public void postCostDB(Cost cost, String monthYear) {
+        DatabaseReference costsRef = this.dbRef.child("month-year");
+        costsRef.child(monthYear).child(cost.getId()).setValueAsync(cost);
+    }
+
+    public void deleteCostDB(String id, String monthYear) {
+        DatabaseReference costRef = this.dbRef.child("month-year/" + monthYear + "/" + id);
+        costRef.removeValueAsync();
     }
 }

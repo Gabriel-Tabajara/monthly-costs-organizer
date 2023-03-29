@@ -27,12 +27,22 @@ public class CostService {
         this.costRep.postCostDB(cost, monthyear);
     }
 
+    public Cost getCostById(String id, String monthYear) throws Exception {
+        CompletableFuture<Cost> future = this.costRep.getCostById(id, monthYear);
+        Cost cost = future.get();
+        
+        return cost;
+    }
+
+    public void deleteCost(String id, String monthYear) {
+        this.costRep.deleteCostDB(id, monthYear);
+    }
+
     public ArrayList<Cost> getCostsByMonth(String month, String year) throws Exception {
         String mthYrId = MonthYear.dateToMonthYear(month, year);
 
         CompletableFuture<ArrayList<Cost>> future = this.costRep.getCostsByMonthDB(mthYrId);
-        ArrayList<Cost> costsFromMonth;
-        costsFromMonth = future.get();
+        ArrayList<Cost> costsFromMonth = future.get();
 
         return costsFromMonth;
     }

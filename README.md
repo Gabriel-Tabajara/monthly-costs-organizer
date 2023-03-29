@@ -1,14 +1,13 @@
 # Monthly costs organizer
 
-Do an interface to organize my monthly costs
+An API to organize my monthly costs
 
 ## Features
 
 ### 1 - Cost management
 - Add a cost ✅
 - Get all costs by month ✅
-- Edit a cost
-- Delete a cost
+- Delete a cost✅
 - Filter by the more expensive to the least and vice versa
 - Filter the costs by week in month
 - Put in order by day
@@ -30,14 +29,15 @@ Do an interface to organize my monthly costs
 
 ## Entitys
 
-- COST 
-    - id (PK)
-    - value
-    - date
-    - local (FK)
-    - category (FK)
+- MonthYear
+    - Cost[]
+        - id
+        - value
+        - day
+        - local 
+        - category 
 - CATEGORY 
-    - id (PK)
+    - id 
     - name
     - limit
 - LOCAL 
