@@ -32,6 +32,7 @@ public class DeleteCostUC {
 
             return ResponseEntity.status(HttpStatus.OK).body("Cost Succesfully Deleted!");
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unexpected Error!");
         }
     }

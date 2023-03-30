@@ -11,7 +11,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.monthlycostsorganizer.api.models.entitys.Cost;
-import com.monthlycostsorganizer.api.models.entitys.MonthYear;
 
 @Repository
 public class CostRepository {

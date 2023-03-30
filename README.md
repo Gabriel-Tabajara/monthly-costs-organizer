@@ -12,7 +12,7 @@ An API to organize my monthly costs
 - Filter the costs by week in month - Front-end
 - Put in order by day - Order Route✅
 ### 2 - Categories
-- Add a category (name, month and limit, no limit should be an option)
+- Add a category (name, month and limit, no limit per month should be an option)
 - Add a cost into a category
 - Get a category with all costs on it
 - Edit a category
@@ -40,6 +40,7 @@ An API to organize my monthly costs
     - id 
     - name
     - limit
+    - costId[]
 - LOCAL 
     - id
     - name 

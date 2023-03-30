@@ -12,39 +12,47 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import com.monthlycostsorganizer.api.models.DTOs.AddCostDTO;
-import com.monthlycostsorganizer.api.models.entitys.Cost;
-import com.monthlycostsorganizer.api.services.CostService;
+import com.monthlycostsorganizer.api.models.DTOs.AddCategoryDTO;
+import com.monthlycostsorganizer.api.models.entitys.Category;
+import com.monthlycostsorganizer.api.models.entitys.CategoryWithLimit;
+import com.monthlycostsorganizer.api.services.CategoryService;
 
 @Component
-public class AddCostUC {
-    private CostService costService;
+public class AddCategoryUC {
+    private CategoryService categoryService;
 
     @Autowired
-    public AddCostUC(CostService costService) {
-        this.costService = costService;
+    public AddCategoryUC(CategoryService categoryService) {
+        this.categoryService = categoryService;
     }
 
-    public ResponseEntity<String> execute(AddCostDTO body) {
+    public ResponseEntity<String> execute(AddCategoryDTO body) {
         try {
             ValidatorFactory validFactory = Validation.buildDefaultValidatorFactory();
             Validator validator = validFactory.getValidator();
     
-            Set<ConstraintViolation<AddCostDTO>> violations = validator.validate(body);
+            Set<ConstraintViolation<AddCategoryDTO>> violations = validator.validate(body);
     
             if (violations.size() > 0) {
                 StringBuilder errorMessage = new StringBuilder();
-                for (ConstraintViolation<AddCostDTO> violation : violations) {
+                for (ConstraintViolation<AddCategoryDTO> violation : violations) {
                     errorMessage.append(String.format("Error: %s\n", violation.getMessage()));
                 }
     
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage.toString());
             }
-    
-            Cost newCost = new Cost(body.getValue(), body.getDate(), body.getLocal(), body.getCategoryId());
-    
-            this.costService.addCost(newCost, body.getDate());
-            return ResponseEntity.status(HttpStatus.CREATED).body("Cost Succesfully Added!");
+
+            Category newCategory;
+
+            if (body.getLimit() == null) {
+                newCategory = new Category(body.getName());
+            } else {
+                newCategory = new CategoryWithLimit(body.getName(), body.getLimit());
+            }
+
+            
+            this.categoryService.addCategory(newCategory);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Category Succesfully Added!");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unexpected Error!");
