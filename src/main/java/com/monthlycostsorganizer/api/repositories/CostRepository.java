@@ -3,7 +3,6 @@ package com.monthlycostsorganizer.api.repositories;
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.google.firebase.database.DataSnapshot;
@@ -16,7 +15,6 @@ import com.monthlycostsorganizer.api.models.entitys.Cost;
 public class CostRepository {
     private DatabaseReference dbRef;
 
-    @Autowired
     public CostRepository(DatabaseReference databaseReference) {
         this.dbRef = databaseReference;
     }

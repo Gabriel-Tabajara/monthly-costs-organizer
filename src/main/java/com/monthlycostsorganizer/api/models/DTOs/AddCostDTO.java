@@ -15,14 +15,11 @@ public class AddCostDTO {
     @NotNull(message = "local cannot be empty")
     private String local;
 
-    @NotNull(message = "categoryId cannot be empty")
-    private String categoryId;
 
-    public AddCostDTO(double value, Date date, String local, String categoryId) {
+    public AddCostDTO(double value, Date date, String local) {
         this.value = value;
         this.date = date;
         this.local = local;
-        this.categoryId =  categoryId;
     }
 
     public double getValue() {
@@ -48,13 +45,4 @@ public class AddCostDTO {
     public void setLocal(String local) {
         this.local = local;
     }
-
-    public String getCategoryId() {
-        return this.categoryId;
-    }
-
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
-    }
-
 }

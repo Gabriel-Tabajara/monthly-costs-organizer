@@ -3,15 +3,7 @@ package com.monthlycostsorganizer.api.models.entitys;
 import java.util.Calendar;
 import java.util.Date;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "MonthYear")
 public class MonthYear {
-    
-    @Id
     private String id;
 
     private Cost[] custos;

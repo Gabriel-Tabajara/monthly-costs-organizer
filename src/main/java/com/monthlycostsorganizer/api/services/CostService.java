@@ -3,7 +3,7 @@ package com.monthlycostsorganizer.api.services;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.CompletableFuture;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +17,6 @@ public class CostService {
 
     private CostRepository costRep;
 
-    @Autowired
     public CostService(CostRepository costRep) {
         this.costRep = costRep;
     }

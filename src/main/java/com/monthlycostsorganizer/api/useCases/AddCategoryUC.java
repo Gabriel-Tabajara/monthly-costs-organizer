@@ -1,13 +1,5 @@
 package com.monthlycostsorganizer.api.useCases;
 
-import java.util.Set;
-
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import javax.validation.ConstraintViolation;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -16,30 +8,25 @@ import com.monthlycostsorganizer.api.models.DTOs.AddCategoryDTO;
 import com.monthlycostsorganizer.api.models.entitys.Category;
 import com.monthlycostsorganizer.api.models.entitys.CategoryWithLimit;
 import com.monthlycostsorganizer.api.services.CategoryService;
+import com.monthlycostsorganizer.api.services.ValidationService;
 
 @Component
 public class AddCategoryUC {
     private CategoryService categoryService;
 
-    @Autowired
-    public AddCategoryUC(CategoryService categoryService) {
+    private ValidationService<AddCategoryDTO> validationService;
+
+    public AddCategoryUC(CategoryService categoryService, ValidationService<AddCategoryDTO> validationService) {
         this.categoryService = categoryService;
+        this.validationService = validationService;
     }
 
     public ResponseEntity<String> execute(AddCategoryDTO body) {
         try {
-            ValidatorFactory validFactory = Validation.buildDefaultValidatorFactory();
-            Validator validator = validFactory.getValidator();
-    
-            Set<ConstraintViolation<AddCategoryDTO>> violations = validator.validate(body);
-    
-            if (violations.size() > 0) {
-                StringBuilder errorMessage = new StringBuilder();
-                for (ConstraintViolation<AddCategoryDTO> violation : violations) {
-                    errorMessage.append(String.format("Error: %s\n", violation.getMessage()));
-                }
-    
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage.toString());
+            boolean isValid = this.validationService.isValid(body);
+
+            if (!isValid) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(this.validationService.getMessage());
             }
 
             Category newCategory;

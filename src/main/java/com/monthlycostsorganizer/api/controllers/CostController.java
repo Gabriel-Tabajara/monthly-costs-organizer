@@ -1,6 +1,5 @@
 package com.monthlycostsorganizer.api.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,7 +23,6 @@ public class CostController {
     private GetMonthlyCostsUC getMonthlyCostsUC;
     private DeleteCostUC deleteCostUC;
 
-    @Autowired
     public CostController(AddCostUC addCostUc, GetMonthlyCostsUC getAllCostsByMonthUC, DeleteCostUC deleteCostUC) {
         this.addCostUc = addCostUc;
         this.getMonthlyCostsUC = getAllCostsByMonthUC;

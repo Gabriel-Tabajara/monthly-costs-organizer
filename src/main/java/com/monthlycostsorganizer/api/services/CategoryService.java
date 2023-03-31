@@ -1,6 +1,5 @@
 package com.monthlycostsorganizer.api.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.monthlycostsorganizer.api.models.entitys.Category;
@@ -13,7 +12,6 @@ import jakarta.transaction.Transactional;
 public class CategoryService {
     private CategoryRepository categoryRep;
 
-    @Autowired
     public CategoryService(CategoryRepository categoryRep) {
         this.categoryRep = categoryRep;
     }

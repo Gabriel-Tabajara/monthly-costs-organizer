@@ -4,15 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "cost")
 public class Cost {
-
-    @Id
     private String id;
 
     private double value;
@@ -24,6 +16,16 @@ public class Cost {
     private String categoryId;
 
     public Cost() {}
+
+    public Cost(double value, Date date, String local) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        this.id = UUID.randomUUID().toString();
+        this.value = value;
+        this.day = calendar.get(Calendar.DAY_OF_MONTH) + 1;
+        this.local = local;
+        this.categoryId = null;
+    }
 
     public Cost(double value, Date date, String local, String categoryId) {
         Calendar calendar = Calendar.getInstance();

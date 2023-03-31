@@ -1,6 +1,5 @@
 package com.monthlycostsorganizer.api.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +15,6 @@ import com.monthlycostsorganizer.api.useCases.AddCategoryUC;
 public class CategoryController {
     private AddCategoryUC addCostUc;
 
-    @Autowired
     public CategoryController(AddCategoryUC addCostUc) {
         this.addCostUc = addCostUc;
     }
